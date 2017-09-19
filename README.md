@@ -1,6 +1,6 @@
-<53979721>
+53979721
 
 # Prácticas de Programación 3: Juego de la vida de Conway
-**Alumno/a:** <Daniel Primitivo Cano>
+**Alumno/a:** Daniel Primitivo Cano
 
-**Grupo de prácticas:** <6>
+**Grupo de prácticas:** 6
