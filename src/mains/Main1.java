@@ -11,7 +11,7 @@ public class Main1 {
 
 	/**
 	 * Clase principal de la P1
-	 * @param args
+	 * @param args Parametro de tipo array el cual contiene los argumentos que se pasan
 	 */
 	public static void main(String[] args) {
 		//Coordenada c0; // no se instancia porque no se ha hecho new
