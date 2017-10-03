@@ -36,7 +36,7 @@ public class Coordenada {
 		this.x = x;
 		this.y = y;
 		NUMERO_COORDENADAS++;
-	};
+	}
 	
 	/**
 	 * Es el método constructor en el cual recibes por parametro un objeto coordenada que permite 
@@ -47,7 +47,7 @@ public class Coordenada {
 		this.x = otra.x;
 		this.y = otra.y;
 		NUMERO_COORDENADAS++;
-	};
+	}
 	
 	/**
 	 * Es el método en el cual obtienes el número de coordenadas que hay
@@ -55,7 +55,7 @@ public class Coordenada {
 	 */
 	public static int getNumeroCoordenadas() {
 		return NUMERO_COORDENADAS;
-	};
+	}
 	
 	/**
 	 * Es el método en el cual devuelve la coordenada en tipo String
@@ -64,7 +64,7 @@ public class Coordenada {
 	@Override
 	public String toString() {
 		return "(" + x + "," + y + ")";
-	};
+	}
 	
 	/**
 	 * Es el método en el cual nos pasan por parámetro un objeto de tipo Object y comprobamos si es de 
@@ -95,15 +95,15 @@ public class Coordenada {
 	 */
 	public int getX() {
 		return x;
-	};
-	
+	}
+
 	/**
 	 * Es el método en el cual obtienes la ordenada de la coordenada
 	 * @return Devuelve la ordenada de la coordenada
 	 */
 	public int getY() {
 		return y;
-	};
+	}
 	
 	/**
 	 * Es el método en el cual te pasan un objeto de tipo coordenada y devuelves una nueva coordenada, 
@@ -113,6 +113,15 @@ public class Coordenada {
 	 */
 	public Coordenada suma(Coordenada otra) {
 		return new Coordenada(x + otra.x, y + otra.y);
+	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + x;
+		result = prime * result + y;
+		return result;
 	}
 	
 }
