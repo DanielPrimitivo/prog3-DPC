@@ -4,6 +4,9 @@
 
 package modelo;
 
+/**
+ * Esta clase es de tipo enum y solo contiene dos valores que son muerta y viva
+ */
 public enum EstadoCelda {
 	MUERTA,
     VIVA;

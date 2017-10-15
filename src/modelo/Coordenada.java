@@ -115,6 +115,11 @@ public class Coordenada {
 		return new Coordenada(x + otra.x, y + otra.y);
 	}
 	
+	/**
+	 * Es el método en el cual obtenemos un valor a partir de la combinación de campos de la clase en
+	 * este caso x e y
+	 * @return Devuelve el resultado de las operaciones realizadas
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
