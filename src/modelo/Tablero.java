@@ -110,37 +110,42 @@ public class Tablero {
 	 * @return Devuelve un ArrayList con las posiciones de alrededor a la pasada por parámetro
 	 */
 	public ArrayList <Coordenada> getPosicionesVecinasCCW(Coordenada posicion) {
-		ArrayList<Coordenada> coordenadasVecinas = new ArrayList<Coordenada>();
-		
-		int x = posicion.getX() - 1;
-		int y = posicion.getY() - 1;
-		
-		while (x <= posicion.getX()) {
-			if (contiene(new Coordenada(x,y))) {
-				coordenadasVecinas.add(new Coordenada(x,y));
+		if (contiene(new Coordenada(posicion))) {
+			ArrayList<Coordenada> coordenadasVecinas = new ArrayList<Coordenada>();
+			
+			int x = posicion.getX() - 1;
+			int y = posicion.getY() - 1;
+			
+			while (x <= posicion.getX()) {
+				if (contiene(new Coordenada(x,y))) {
+					coordenadasVecinas.add(new Coordenada(x,y));
+				}
+				
+				if (y > posicion.getY()) {
+					x++;
+				}
+				else {
+					y++;
+				}
+			}
+			while (x >= posicion.getX()) {
+				if (contiene(new Coordenada(x,y))) {
+					coordenadasVecinas.add(new Coordenada(x,y));
+				}
+				
+				if (y < posicion.getY()) {
+					 x--;
+				}
+				else {
+					y--;
+				}
 			}
 			
-			if (y > posicion.getY()) {
-				x++;
-			}
-			else {
-				y++;
-			}
+			return coordenadasVecinas;
 		}
-		while (x >= posicion.getX()) {
-			if (contiene(new Coordenada(x,y))) {
-				coordenadasVecinas.add(new Coordenada(x,y));
-			}
-			
-			if (y < posicion.getY()) {
-				 x--;
-			}
-			else {
-				y--;
-			}
+		else {
+			return null;
 		}
-		
-		return coordenadasVecinas;
 	}
 	
 	/**
@@ -223,7 +228,7 @@ public class Tablero {
 			cadenaTablero += "-";
 		}
 		
-		cadenaTablero += "+";
+		cadenaTablero += "+\n";
 		
 		return cadenaTablero;
 	}
