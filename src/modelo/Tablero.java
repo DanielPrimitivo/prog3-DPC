@@ -5,6 +5,7 @@
 package modelo;
 
 import java.util.*;
+import modelo.excepciones.*;
 
 /**
  * Esta clase permite crear un HashMap (que es una matriz de celdas) en la cual se inicializa rellena con 
@@ -30,14 +31,24 @@ public class Tablero {
 	 * @param dimensiones Es el tamaño del tablero
 	 */
 	public Tablero(Coordenada dimensiones) {
-		celdas = new HashMap<Coordenada,EstadoCelda>();
-		this.dimensiones = new Coordenada(dimensiones);
-		
-		for (int i = 0;i < dimensiones.getX();i++) {
-			for (int j = 0;j < dimensiones.getY();j++) {
-				Coordenada coordenada = new Coordenada(i,j);
-				celdas.put(coordenada, EstadoCelda.MUERTA);
+		if (dimensiones != null) {
+			celdas = new HashMap<Coordenada,EstadoCelda>();
+			this.dimensiones = new Coordenada(dimensiones);
+			
+			for (int i = 0;i < dimensiones.getX();i++) {
+				for (int j = 0;j < dimensiones.getY();j++) {
+					try {
+						Coordenada coordenada = new Coordenada(i,j);
+						celdas.put(coordenada, EstadoCelda.MUERTA);
+					}
+					catch (ExcepcionCoordenadaIncorrecta e) {
+						throw new ExcepcionEjecucion(e);
+					}
+				}
 			}
+		}
+		else {
+			throw new ExcepcionArgumentosIncorrectos();
 		}
 	}
 	
@@ -66,25 +77,21 @@ public class Tablero {
 	 * y devolvemos null
 	 * @param posicion Es la posicion la cual debes obtener su estado
 	 * @return Devuelve un objeto de tipo EstadoCelda o en caso de no existir entonces devuelve null
+	 * @throws ExcepcionPosicionFueraTablero 
 	 */
-	public EstadoCelda getCelda(Coordenada posicion) {
-		if (contiene(posicion)) {
-			EstadoCelda valorEstado = celdas.get(new Coordenada(posicion));
-			return valorEstado;
+	public EstadoCelda getCelda(Coordenada posicion) throws ExcepcionPosicionFueraTablero {
+		if (posicion != null) {
+			if (contiene(posicion)) {
+				EstadoCelda valorEstado = celdas.get(new Coordenada(posicion));
+				return valorEstado;
+			}
+			else {
+				throw new ExcepcionPosicionFueraTablero(dimensiones, posicion);
+			}
 		}
 		else {
-			muestraErrorPosicionInvalida(posicion);
-			return null;
+			throw new ExcepcionArgumentosIncorrectos();
 		}
-	}
-	
-	/**
-	 * Es un método en el cual se imprime un mensaje por la salida de error indicando que la coordenada 
-	 * que te pasan no existe en el tablero
-	 * @param c Es la coordenada la cual no existe y debes mostrar en el error
-	 */
-	private void muestraErrorPosicionInvalida(Coordenada c) {
-		System.err.println("Error: La celda " + c.toString() + " no existe");
 	}
 	
 	/**
@@ -93,13 +100,19 @@ public class Tablero {
 	 * llamamos al método que muestra por pantalla el error
 	 * @param posicion Es la coordenada la cual queremos actualizarle su estado asociado
 	 * @param e Es el estado que queremos poner a la coordenada indicada
+	 * @throws ExcepcionPosicionFueraTablero 
 	 */
-	public void setCelda(Coordenada posicion, EstadoCelda e) {
-		if (contiene(posicion)) {
-			celdas.put(new Coordenada(posicion), e);
+	public void setCelda(Coordenada posicion, EstadoCelda e) throws ExcepcionPosicionFueraTablero {
+		if(posicion != null && e != null) {
+			if (contiene(posicion)) {
+				celdas.put(new Coordenada(posicion), e);
+			}
+			else {
+				throw new ExcepcionPosicionFueraTablero(dimensiones, posicion);
+			}
 		}
 		else {
-			muestraErrorPosicionInvalida(posicion);
+			throw new ExcepcionArgumentosIncorrectos();
 		}
 	}
 	
@@ -108,43 +121,64 @@ public class Tablero {
 	 * a las agujas del reloj para ver si existen esas posiciones y meterlas en un ArrayList
 	 * @param posicion Es la coordenada central la cual se va a obtener sus coordenas de alrededor
 	 * @return Devuelve un ArrayList con las posiciones de alrededor a la pasada por parámetro
+	 * @throws ExcepcionPosicionFueraTablero 
 	 */
-	public ArrayList <Coordenada> getPosicionesVecinasCCW(Coordenada posicion) {
-		if (contiene(new Coordenada(posicion))) {
-			ArrayList<Coordenada> coordenadasVecinas = new ArrayList<Coordenada>();
-			
-			int x = posicion.getX() - 1;
-			int y = posicion.getY() - 1;
-			
-			while (x <= posicion.getX()) {
-				if (contiene(new Coordenada(x,y))) {
-					coordenadasVecinas.add(new Coordenada(x,y));
+	public ArrayList <Coordenada> getPosicionesVecinasCCW(Coordenada posicion) throws ExcepcionPosicionFueraTablero {
+		if (posicion != null) {
+			if (contiene(new Coordenada(posicion))) {
+				ArrayList<Coordenada> coordenadasVecinas = new ArrayList<Coordenada>();
+				Coordenada coord;
+				
+				int x = posicion.getX() - 1;
+				int y = posicion.getY() - 1;
+				
+				while (x <= posicion.getX()) {
+					try {
+						coord = new Coordenada(x,y);
+					}
+					catch (ExcepcionCoordenadaIncorrecta e) {
+						throw new ExcepcionEjecucion(e);
+					}
+					
+					if (contiene(coord)) {
+						coordenadasVecinas.add(coord);
+					}
+					
+					if (y > posicion.getY()) {
+						x++;
+					}
+					else {
+						y++;
+					}
+				}
+				while (x >= posicion.getX()) {
+					try {
+						coord = new Coordenada(x,y);
+					}
+					catch (ExcepcionCoordenadaIncorrecta e) {
+						throw new ExcepcionEjecucion(e);
+					}
+					
+					if (contiene(coord)) {
+						coordenadasVecinas.add(coord);
+					}
+					
+					if (y < posicion.getY()) {
+						 x--;
+					}
+					else {
+						y--;
+					}
 				}
 				
-				if (y > posicion.getY()) {
-					x++;
-				}
-				else {
-					y++;
-				}
+				return coordenadasVecinas;
 			}
-			while (x >= posicion.getX()) {
-				if (contiene(new Coordenada(x,y))) {
-					coordenadasVecinas.add(new Coordenada(x,y));
-				}
-				
-				if (y < posicion.getY()) {
-					 x--;
-				}
-				else {
-					y--;
-				}
+			else {
+				throw new ExcepcionPosicionFueraTablero(dimensiones, posicion);
 			}
-			
-			return coordenadasVecinas;
 		}
 		else {
-			return null;
+			throw new ExcepcionArgumentosIncorrectos();
 		}
 	}
 	
@@ -155,26 +189,38 @@ public class Tablero {
 	 * @param patron Es un objeto de tipo Patron el cual queremos cargar (meter actualizando) en tablero
 	 * @param coordenadaInicial Es un objeto de tipo coordenada que pasa la coordenada superior izquierda de patron
 	 * @return Devuelve un valor booleano en función de si se puede cargar o no
+	 * @throws ExcepcionPosicionFueraTablero 
 	 */
-	public boolean cargaPatron(Patron patron, Coordenada coordenadaInicial) {
-		boolean existe = true;
-		
-		for (Coordenada coord : patron.getPosiciones()) {
-			Coordenada coordenada = coord.suma(coordenadaInicial);
-			if (!contiene(coordenada) && existe == true) {
-				existe = false;
-				muestraErrorPosicionInvalida(coordenada);
-			}
-		}
-		
-		if (existe == true) {
+	public void cargaPatron(Patron patron, Coordenada coordenadaInicial) throws ExcepcionPosicionFueraTablero {
+		if (patron != null && coordenadaInicial != null) {
+			
 			for (Coordenada coord : patron.getPosiciones()) {
-				Coordenada coordenada = coord.suma(coordenadaInicial);
-				setCelda(coordenada, patron.getCelda(coord));
+				try {
+					Coordenada coordenada = coord.suma(coordenadaInicial);
+					
+					if (!contiene(coordenada)) {
+						throw new ExcepcionPosicionFueraTablero(dimensiones, coordenada);
+					}
+				}
+				catch (ExcepcionCoordenadaIncorrecta e) {
+					throw new ExcepcionEjecucion(e);
+				}
+				
+			}
+			
+			for (Coordenada coord : patron.getPosiciones()) {
+				try {
+					Coordenada coordenada = coord.suma(coordenadaInicial);
+					setCelda(coordenada, patron.getCelda(coord));
+				}
+				catch (ExcepcionCoordenadaIncorrecta e) {
+					throw new ExcepcionEjecucion(e);
+				}
 			}
 		}
-		
-		return existe;
+		else {
+			throw new ExcepcionArgumentosIncorrectos();
+		}
 	}
 	
 	/**
@@ -184,11 +230,16 @@ public class Tablero {
 	 * @return Devuelve un valor de tipo booleano de si la contiene o no
 	 */
 	public boolean contiene(Coordenada posicion) {
-		if (celdas.containsKey(new Coordenada(posicion))) {
-			return true;
+		if (posicion != null) {
+			if (celdas.containsKey(new Coordenada(posicion))) {
+				return true;
+			}
+			else {
+				return false;
+			}
 		}
 		else {
-			return false;
+			throw new ExcepcionArgumentosIncorrectos();
 		}
 	}
 	
@@ -210,13 +261,23 @@ public class Tablero {
 		for (int i = 0;i < dimensiones.getY();i++) {
 			cadenaTablero += "|";
 			for (int j = 0;j < dimensiones.getX();j++) {
-				Coordenada coord = new Coordenada(j,i);
-				
-				if (EstadoCelda.VIVA == getCelda(coord)) {
-					cadenaTablero += "*";
+				try {
+					Coordenada coord = new Coordenada(j,i);
+					
+					try {
+						if (EstadoCelda.VIVA == getCelda(coord)) {
+							cadenaTablero += "*";
+						}
+						else {
+							cadenaTablero += " ";
+						}
+					}
+					catch (ExcepcionPosicionFueraTablero e) {
+						throw new ExcepcionEjecucion(e);
+					}
 				}
-				else {
-					cadenaTablero += " ";
+				catch (ExcepcionCoordenadaIncorrecta e) {
+					throw new ExcepcionEjecucion(e);
 				}
 			}
 			cadenaTablero += "|\n";

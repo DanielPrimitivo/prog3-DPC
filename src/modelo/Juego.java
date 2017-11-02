@@ -5,6 +5,7 @@
 package modelo;
 
 import java.util.*;
+import modelo.excepciones.*;
 
 /**
  * Esta clase permite crear un objeto Juego el cual tiene un ArrayList de los patrones que se introducen 
@@ -36,8 +37,13 @@ public class Juego {
 	 * @param regla Es la regla la cual la vamos a asignar al atributo
 	 */
 	public Juego(Tablero tablero, ReglaConway regla) {
-		this.tablero = tablero;
-		this.regla = regla;
+		if (tablero != null && regla != null) {
+			this.tablero = tablero;
+			this.regla = regla;
+		}
+		else {
+			throw new ExcepcionArgumentosIncorrectos();
+		}
 	}
 	
 	/**
@@ -46,13 +52,15 @@ public class Juego {
 	 * mostramos un error
 	 * @param p Es el patron el cual tenemos que comprobar si se puede cargar
 	 * @param posicionInicial Es la coordenada superior izquierda del patron
+	 * @throws ExcepcionPosicionFueraTablero 
 	 */
-	public void cargaPatron(Patron p, Coordenada posicionInicial) {
-		if (tablero.cargaPatron(p, posicionInicial)) {
+	public void cargaPatron(Patron p, Coordenada posicionInicial) throws ExcepcionPosicionFueraTablero {
+		if(p != null && posicionInicial != null) {
+			tablero.cargaPatron(p, posicionInicial);
 			patronesUsados.add(p);
 		}
 		else {
-			System.err.println("Error cargando plantilla " + p.getNombre() + " en " + posicionInicial.toString());
+			throw new ExcepcionArgumentosIncorrectos();
 		}
 	}
 	
@@ -65,11 +73,21 @@ public class Juego {
 		HashMap<Coordenada,EstadoCelda> celdas = new HashMap<Coordenada,EstadoCelda>();
 		
 		for (Coordenada coord : tablero.getPosiciones()) {
-			celdas.put(coord, regla.calculaSiguienteEstadoCelda(tablero,coord));
+			try {
+				celdas.put(coord, regla.calculaSiguienteEstadoCelda(tablero,coord));
+			}
+			catch (ExcepcionPosicionFueraTablero e) {
+				throw new ExcepcionEjecucion(e);
+			}
 		}
 		
 		for (Coordenada coord : celdas.keySet()) {
-			tablero.setCelda(coord, celdas.get(coord));
+			try {
+				tablero.setCelda(coord, celdas.get(coord));
+			}
+			catch (ExcepcionPosicionFueraTablero e) {
+				throw new ExcepcionEjecucion(e);
+			}
 		}
 	}
 	

@@ -4,6 +4,8 @@
 
 package modelo;
 
+import modelo.excepciones.*;
+
 /**
  * Esta clase permite crear nuevas coordenas poniendo un valor a x que es la abcisa y un valor a y 
  * que es la ordenada, además permite saber cuantas coordenadas hay, obtener abcisa u ordenada, 
@@ -31,11 +33,17 @@ public class Coordenada {
 	 * coordenada y además actualiza el contador de coordenadas
 	 * @param x Es la abcisa de la coordenada
 	 * @param y Es la ordenada de la coordenada
+	 * @throws ExcepcionCoordenadaIncorrecta 
 	 */
-	public Coordenada(int x, int y) {
-		this.x = x;
-		this.y = y;
-		NUMERO_COORDENADAS++;
+	public Coordenada(int x, int y) throws ExcepcionCoordenadaIncorrecta {
+		if (x >= 0 && y >= 0) {
+			this.x = x;
+			this.y = y;
+			NUMERO_COORDENADAS++;
+		}
+		else {
+			throw new ExcepcionCoordenadaIncorrecta();
+		}
 	}
 	
 	/**
@@ -44,9 +52,14 @@ public class Coordenada {
 	 * @param otra Es un objeto de tipo coordenada
 	 */
 	public Coordenada(Coordenada otra) {
-		this.x = otra.x;
-		this.y = otra.y;
-		NUMERO_COORDENADAS++;
+		if (otra != null) {
+			this.x = otra.x;
+			this.y = otra.y;
+			NUMERO_COORDENADAS++;
+		}
+		else {
+			throw new ExcepcionArgumentosIncorrectos();
+		}
 	}
 	
 	/**
@@ -111,8 +124,16 @@ public class Coordenada {
 	 * @param otra Parámetro de entrada que es un objeto de tipo coordenada
 	 * @return Devuelve un objeto de tipo coordenada el cual es la suma de ambas coordenadas
 	 */
-	public Coordenada suma(Coordenada otra) {
-		return new Coordenada(x + otra.x, y + otra.y);
+	public Coordenada suma(Coordenada otra) throws ExcepcionCoordenadaIncorrecta {
+		Coordenada coord;
+		if (otra != null) {
+			coord = new Coordenada(x + otra.x, y + otra.y);
+		}
+		else {
+			throw new ExcepcionArgumentosIncorrectos();
+		}
+		
+		return coord;
 	}
 	
 	/**

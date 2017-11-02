@@ -4,6 +4,8 @@
 
 package modelo;
 
+import modelo.excepciones.*;
+
 /**
  * Esta clase permite crear un objeto ReglaConway el cual tiene un constructor vacío y un getter que te 
  * calcula el siguiente estado de una coordenada de un tablero en función de unas reglas y te devuelve 
@@ -23,34 +25,39 @@ public class ReglaConway {
 	 * @param posicion Es la coordenada la cual quieres saber cual va a ser su siguiente estado
 	 * @return Devuelve un objeto de tipo EstadoCelda de si el siguiente estado está viva o muerta
 	 */
-	public EstadoCelda calculaSiguienteEstadoCelda(Tablero tablero, Coordenada posicion) {
-		EstadoCelda siguienteEstado = EstadoCelda.MUERTA;
-		int numeroVivas = 0;
-		
-		if (tablero.getCelda(posicion) == EstadoCelda.MUERTA) {
-			for (Coordenada coord : tablero.getPosicionesVecinasCCW(posicion)) {
-				if (tablero.getCelda(coord) == EstadoCelda.VIVA) {
-					numeroVivas++;
+	public EstadoCelda calculaSiguienteEstadoCelda(Tablero tablero, Coordenada posicion) throws ExcepcionPosicionFueraTablero {
+		if (tablero != null && posicion != null) {
+			EstadoCelda siguienteEstado = EstadoCelda.MUERTA;
+			int numeroVivas = 0;
+			
+			if (tablero.getCelda(posicion) == EstadoCelda.MUERTA) {
+				for (Coordenada coord : tablero.getPosicionesVecinasCCW(posicion)) {
+					if (tablero.getCelda(coord) == EstadoCelda.VIVA) {
+						numeroVivas++;
+					}
+				}
+				
+				if (numeroVivas == 3) {
+					siguienteEstado = EstadoCelda.VIVA;
+				}
+			}
+			else {
+				for (Coordenada coord : tablero.getPosicionesVecinasCCW(posicion)) {
+					if (tablero.getCelda(coord) == EstadoCelda.VIVA) {
+						numeroVivas++;
+					}
+				}
+				
+				if (numeroVivas == 2 || numeroVivas == 3) {
+					siguienteEstado = EstadoCelda.VIVA;
 				}
 			}
 			
-			if (numeroVivas == 3) {
-				siguienteEstado = EstadoCelda.VIVA;
-			}
+			return siguienteEstado;
 		}
 		else {
-			for (Coordenada coord : tablero.getPosicionesVecinasCCW(posicion)) {
-				if (tablero.getCelda(coord) == EstadoCelda.VIVA) {
-					numeroVivas++;
-				}
-			}
-			
-			if (numeroVivas == 2 || numeroVivas == 3) {
-				siguienteEstado = EstadoCelda.VIVA;
-			}
+			throw new ExcepcionArgumentosIncorrectos();
 		}
-		
-		return siguienteEstado;
 	}
 	
 }

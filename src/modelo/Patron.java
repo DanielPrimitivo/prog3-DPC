@@ -5,6 +5,7 @@
 package modelo;
 
 import java.util.*;
+import modelo.excepciones.*;
 
 /**
  * Esta clase permite crear un patron en el cual sus atributos son un objeto tablero y un nombre (String), 
@@ -29,8 +30,13 @@ public class Patron {
 	 * @param tablero Es el tablero el cual tiene las coordenadas y los EstadoCelda que vamos a guardar
 	 */
 	public Patron(String nombre, Tablero tablero) {
-		this.nombre = nombre;
-		this.tablero = tablero;
+		if (nombre != null && tablero != null) {
+			this.nombre = nombre;
+			this.tablero = tablero;
+		}
+		else {
+			throw new ExcepcionArgumentosIncorrectos();
+		}
 	}
 	
 	/**
@@ -47,8 +53,13 @@ public class Patron {
 	 * @param posicion Es la coordenada la cual debemos obtener el EstadoCelda
 	 * @return Devuelve el EstadoCelda asociado a la posicion
 	 */
-	public EstadoCelda getCelda(Coordenada posicion) {
-		return tablero.getCelda(posicion);
+	public EstadoCelda getCelda(Coordenada posicion) throws ExcepcionPosicionFueraTablero {
+		if (posicion != null) {
+			return tablero.getCelda(posicion);
+		}
+		else {
+			throw new ExcepcionArgumentosIncorrectos();
+		}
 	}
 	
 	/**
