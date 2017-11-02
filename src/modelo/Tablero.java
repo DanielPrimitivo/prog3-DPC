@@ -133,15 +133,17 @@ public class Tablero {
 				int y = posicion.getY() - 1;
 				
 				while (x <= posicion.getX()) {
-					try {
-						coord = new Coordenada(x,y);
-					}
-					catch (ExcepcionCoordenadaIncorrecta e) {
-						throw new ExcepcionEjecucion(e);
-					}
-					
-					if (contiene(coord)) {
-						coordenadasVecinas.add(coord);
+					if (x >= 0 && y >= 0) {
+						try {
+							coord = new Coordenada(x,y);
+						}
+						catch (ExcepcionCoordenadaIncorrecta e) {
+							throw new ExcepcionEjecucion(e);
+						}
+						
+						if (contiene(coord)) {
+							coordenadasVecinas.add(coord);
+						}
 					}
 					
 					if (y > posicion.getY()) {
@@ -152,15 +154,17 @@ public class Tablero {
 					}
 				}
 				while (x >= posicion.getX()) {
-					try {
-						coord = new Coordenada(x,y);
-					}
-					catch (ExcepcionCoordenadaIncorrecta e) {
-						throw new ExcepcionEjecucion(e);
-					}
-					
-					if (contiene(coord)) {
-						coordenadasVecinas.add(coord);
+					if (x >= 0 && y >= 0) {
+						try {
+							coord = new Coordenada(x,y);
+						}
+						catch (ExcepcionCoordenadaIncorrecta e) {
+							throw new ExcepcionEjecucion(e);
+						}
+						
+						if (contiene(coord)) {
+							coordenadasVecinas.add(coord);
+						}
 					}
 					
 					if (y < posicion.getY()) {
