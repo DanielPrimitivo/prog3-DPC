@@ -28,7 +28,7 @@ public class Juego {
 	/**
 	 * Es un atributo que es un objeto de tipo ReglaConway
 	 */
-	private ReglaConway regla;
+	private Regla regla;
 	
 	/**
 	 * Es un método constructor en el cual nos pasan un tablero y una regla y tenemos que asignarlos a 
@@ -36,7 +36,7 @@ public class Juego {
 	 * @param tablero Es el tablero el cual vamos a asignar al atributo
 	 * @param regla Es la regla la cual la vamos a asignar al atributo
 	 */
-	public Juego(Tablero tablero, ReglaConway regla) {
+	public Juego(Tablero tablero, Regla regla) {
 		if (tablero != null && regla != null) {
 			this.tablero = tablero;
 			this.regla = regla;

@@ -11,7 +11,7 @@ import modelo.excepciones.*;
  * calcula el siguiente estado de una coordenada de un tablero en función de unas reglas y te devuelve 
  * si el siguiente estado será viva o muerta
  */
-public class ReglaConway {
+public class ReglaConway extends Regla {
 	
 	/**
 	 * Es un método constructor que en este caso está vacío

@@ -111,7 +111,7 @@ public abstract class Tablero {
 	 * @return Devuelve un ArrayList con las posiciones de alrededor a la pasada por parámetro
 	 * @throws ExcepcionPosicionFueraTablero 
 	 */
-	public abstract ArrayList <Coordenada> getPosicionesVecinasCCW(Coordenada posicion) throws ExcepcionPosicionFueraTablero; /*{
+	public abstract ArrayList <Coordenada> getPosicionesVecinasCCW(Coordenada posicion) throws ExcepcionPosicionFueraTablero;
 		
 	
 	/**
