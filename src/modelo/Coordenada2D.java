@@ -9,7 +9,7 @@ import modelo.excepciones.*;
 /**
  * Esta clase permite crear nuevas coordenas poniendo un valor a x que es la abcisa y un valor a y 
  * que es la ordenada, además permite saber cuantas coordenadas hay, obtener abcisa u ordenada, 
- * comparar dos coordenadas, sumar dos coordenas e imprimirlas por pantalla
+ * comparar dos coordenadas, sumar dos coordenas e imprimirlas por pantalla. Hereda de Coordenada
  */
 public class Coordenada2D extends Coordenada {
 	
@@ -28,7 +28,7 @@ public class Coordenada2D extends Coordenada {
 	 * coordenada y además actualiza el contador de coordenadas
 	 * @param x Es la abcisa de la coordenada
 	 * @param y Es la ordenada de la coordenada
-	 * @throws ExcepcionCoordenadaIncorrecta 
+	 * @throws ExcepcionCoordenadaIncorrecta Puede lanzar la excepción
 	 */
 	public Coordenada2D(int x, int y) throws ExcepcionCoordenadaIncorrecta {
 		if (x >= 0 && y >= 0) {
@@ -108,6 +108,7 @@ public class Coordenada2D extends Coordenada {
 	 * que es la suma de la coordenada que tienes con la que te pasan
 	 * @param otra Parámetro de entrada que es un objeto de tipo coordenada
 	 * @return Devuelve un objeto de tipo coordenada el cual es la suma de ambas coordenadas
+	 * @throws ExcepcionCoordenadaIncorrecta Puede lanzar la excepción
 	 */
 	public Coordenada2D suma(Coordenada otra) throws ExcepcionCoordenadaIncorrecta {
 		Coordenada2D c = (Coordenada2D) otra;

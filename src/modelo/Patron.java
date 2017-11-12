@@ -52,6 +52,7 @@ public class Patron {
 	 * nos devuelva el estado de esa celda que está asociada a la coordenada
 	 * @param posicion Es la coordenada la cual debemos obtener el EstadoCelda
 	 * @return Devuelve el EstadoCelda asociado a la posicion
+	 * @throws ExcepcionPosicionFueraTablero Puede lanzar la excepción
 	 */
 	public EstadoCelda getCelda(Coordenada posicion) throws ExcepcionPosicionFueraTablero {
 		if (posicion != null) {

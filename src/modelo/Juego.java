@@ -26,7 +26,7 @@ public class Juego {
 	private Tablero tablero;
 	
 	/**
-	 * Es un atributo que es un objeto de tipo ReglaConway
+	 * Es un atributo que es un objeto de tipo Regla
 	 */
 	private Regla regla;
 	
@@ -52,7 +52,7 @@ public class Juego {
 	 * mostramos un error
 	 * @param p Es el patron el cual tenemos que comprobar si se puede cargar
 	 * @param posicionInicial Es la coordenada superior izquierda del patron
-	 * @throws ExcepcionPosicionFueraTablero 
+	 * @throws ExcepcionPosicionFueraTablero Puede lanzar la excepción
 	 */
 	public void cargaPatron(Patron p, Coordenada posicionInicial) throws ExcepcionPosicionFueraTablero {
 		if(p != null && posicionInicial != null) {

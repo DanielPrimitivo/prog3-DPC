@@ -1,14 +1,38 @@
+/**
+ * @author Daniel Primitivo Cano - DNI: 53979721D
+ */
+
 package modelo;
 
 import java.util.*;
 
 import modelo.excepciones.*;
 
+/**
+ * Esta clase permite crear un objeto de tipo TableroCeldasCuadradas el cual tiene un constructor para 
+ * crear un Tablero y rellenarlo, tiene un getter que devuelve un ArrayList de coordenadas y un método 
+ * toString para poder mostrar información, se inicializa a estadocelda muerta. Hereda de Tablero2D
+ */
 public class TableroCeldasCuadradas extends Tablero2D {
+	
+	/**
+	 * Es un método constructor en el cual te pasan unos parámetros que sirven para llamar al constructor 
+	 * de la superclase y crear un objeto de tipo Tablero2D
+	 * @param ancho Es el valor de x la abcisa
+	 * @param alto Es el valor de y la ordenada
+	 * @throws ExcepcionCoordenadaIncorrecta Puede lanzar la excepción
+	 */
 	public TableroCeldasCuadradas(int ancho, int alto) throws ExcepcionCoordenadaIncorrecta {
 		super(ancho, alto);
 	}
 	
+	/**
+	 * Es un método en el cual nos pasan posicion que es una coordenada, debemos obtener las coordenadas de 
+	 * alrededor en sentido contrario a las agujas del reloj metiendola en un ArrayList para devolverlo
+	 * @param posicion Es la coordenada central a partir de la cual se obtiene información
+	 * @return devuelve un ArrayList de coordenadas
+	 * @throws ExcepcionPosicionFueraTablero Puede lanzar la excepción
+	 */
 	public ArrayList<Coordenada> getPosicionesVecinasCCW(Coordenada posicion) throws ExcepcionPosicionFueraTablero {
 		if (posicion != null) {
 			Coordenada2D c = (Coordenada2D) posicion;

@@ -27,7 +27,7 @@ public abstract class Tablero {
 	
 	/**
 	 * Es el método constructor en el cual recibes por parametro las dimensiones que lo guardamos en el 
-	 * atributo y rellenamos el HashMap con esas dimensiones y con estado de cada coordenada a muerta
+	 * atributo
 	 * @param dimensiones Es el tamaño del tablero
 	 */
 	protected Tablero(Coordenada dimensiones) {
@@ -65,7 +65,7 @@ public abstract class Tablero {
 	 * y devolvemos null
 	 * @param posicion Es la posicion la cual debes obtener su estado
 	 * @return Devuelve un objeto de tipo EstadoCelda o en caso de no existir entonces devuelve null
-	 * @throws ExcepcionPosicionFueraTablero 
+	 * @throws ExcepcionPosicionFueraTablero Puede lanzar la excepción
 	 */
 	public EstadoCelda getCelda(Coordenada posicion) throws ExcepcionPosicionFueraTablero {
 		if (posicion != null) {
@@ -88,7 +88,7 @@ public abstract class Tablero {
 	 * llamamos al método que muestra por pantalla el error
 	 * @param posicion Es la coordenada la cual queremos actualizarle su estado asociado
 	 * @param e Es el estado que queremos poner a la coordenada indicada
-	 * @throws ExcepcionPosicionFueraTablero 
+	 * @throws ExcepcionPosicionFueraTablero Puede lanzar la excepción
 	 */
 	public void setCelda(Coordenada posicion, EstadoCelda e) throws ExcepcionPosicionFueraTablero {
 		if(posicion != null && e != null) {
@@ -105,11 +105,11 @@ public abstract class Tablero {
 	}
 	
 	/**
-	 * Es un método getter en el cual nos pasan una posición y recorremos su alrededor en sentido contrario 
-	 * a las agujas del reloj para ver si existen esas posiciones y meterlas en un ArrayList
-	 * @param posicion Es la coordenada central la cual se va a obtener sus coordenas de alrededor
-	 * @return Devuelve un ArrayList con las posiciones de alrededor a la pasada por parámetro
-	 * @throws ExcepcionPosicionFueraTablero 
+	 * Es un método getter en el cual nos pasan una posición, pero es un método abstracto, por lo que debe 
+	 * estar implementado en las subclases
+	 * @param posicion Es la coordenada central a partir de la cual se va a obtener información
+	 * @return No devuelve nada ya que es un método abstracto
+	 * @throws ExcepcionPosicionFueraTablero Puede lanzar la excepción
 	 */
 	public abstract ArrayList <Coordenada> getPosicionesVecinasCCW(Coordenada posicion) throws ExcepcionPosicionFueraTablero;
 		
@@ -117,11 +117,10 @@ public abstract class Tablero {
 	/**
 	 * Es un método en el cual nos pasan un patron y una coordenada inicial, hay que comprobar si el patron 
 	 * pasado a partir de la coordenada cabe en el tablero que tenemos, en caso de que no quepa hay que mostrar 
-	 * la primera coordenada que se salga y devolver false, en caso contrario lo cargamos y devolvemos true
+	 * la primera coordenada que se salga, en caso contrario lo cargamos
 	 * @param patron Es un objeto de tipo Patron el cual queremos cargar (meter actualizando) en tablero
 	 * @param coordenadaInicial Es un objeto de tipo coordenada que pasa la coordenada superior izquierda de patron
-	 * @return Devuelve un valor booleano en función de si se puede cargar o no
-	 * @throws ExcepcionPosicionFueraTablero 
+	 * @throws ExcepcionPosicionFueraTablero Puede lanzar la excepción
 	 */
 	public void cargaPatron(Patron patron, Coordenada coordenadaInicial) throws ExcepcionPosicionFueraTablero {
 		if (patron != null && coordenadaInicial != null) {

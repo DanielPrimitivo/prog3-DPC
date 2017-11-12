@@ -7,9 +7,9 @@ package modelo;
 import modelo.excepciones.*;
 
 /**
- * Esta clase permite crear nuevas coordenas poniendo un valor a x que es la abcisa y un valor a y 
- * que es la ordenada, además permite saber cuantas coordenadas hay, obtener abcisa u ordenada, 
- * comparar dos coordenadas, sumar dos coordenas e imprimirlas por pantalla
+ * Esta clase permite crear nuevas coordenas poniendo un valor a x que es la abcisa, además permite 
+ * saber cuantas coordenadas hay, obtener abcisa, comparar dos coordenadas, sumar dos coordenas e 
+ * imprimirlas por pantalla. Hereda de Coordenada
  */
 public class Coordenada1D extends Coordenada {
 	
@@ -19,11 +19,10 @@ public class Coordenada1D extends Coordenada {
 	private int x;
 	
 	/**
-	 * Es el método constructor en el cual recibes por parametro los valores que permiten crear la 
-	 * coordenada y además actualiza el contador de coordenadas
+	 * Es el método constructor en el cual recibes por parametro el valor que permite crear la 
+	 * coordenada
 	 * @param x Es la abcisa de la coordenada
-	 * @param y Es la ordenada de la coordenada
-	 * @throws ExcepcionCoordenadaIncorrecta 
+	 * @throws ExcepcionCoordenadaIncorrecta Puede lanzar la excepción
 	 */
 	public Coordenada1D(int x) throws ExcepcionCoordenadaIncorrecta {
 		if (x >= 0) {
@@ -36,7 +35,7 @@ public class Coordenada1D extends Coordenada {
 	
 	/**
 	 * Es el método constructor en el cual recibes por parametro un objeto coordenada que permite 
-	 * crear la coordenada y además actualiza el contador de coordenadas
+	 * crear la coordenada
 	 * @param otra Es un objeto de tipo coordenada
 	 */
 	public Coordenada1D(Coordenada1D otra) {
@@ -59,7 +58,7 @@ public class Coordenada1D extends Coordenada {
 	
 	/**
 	 * Es el método en el cual nos pasan por parámetro un objeto de tipo Object y comprobamos si es de 
-	 * tipo Coordenada, en caso de no serlo devuelve false, en caso de serlo, entonces lo formateamos 
+	 * tipo Coordenada1D, en caso de no serlo devuelve false, en caso de serlo, entonces lo formateamos 
 	 * y comprobamos si las coordenadas son iguales, en caso de ser cierto devuelve true, sino false.
 	 * @param otro Es un objeto de tipo Object
 	 * @return Devuelve un booleano
@@ -87,10 +86,11 @@ public class Coordenada1D extends Coordenada {
 	}
 	
 	/**
-	 * Es el método en el cual te pasan un objeto de tipo coordenada y devuelves una nueva coordenada, 
+	 * Es el método en el cual te pasan un objeto de tipo coordenada y devuelves una nueva coordenada1D, 
 	 * que es la suma de la coordenada que tienes con la que te pasan
 	 * @param otra Parámetro de entrada que es un objeto de tipo coordenada
 	 * @return Devuelve un objeto de tipo coordenada el cual es la suma de ambas coordenadas
+	 * @throws ExcepcionCoordenadaIncorrecta Puede lanzar la excepción
 	 */
 	public Coordenada1D suma(Coordenada otra) throws ExcepcionCoordenadaIncorrecta {
 		Coordenada1D c = (Coordenada1D) otra;
@@ -107,7 +107,7 @@ public class Coordenada1D extends Coordenada {
 	
 	/**
 	 * Es el método en el cual obtenemos un valor a partir de la combinación de campos de la clase en
-	 * este caso x e y
+	 * este caso x
 	 * @return Devuelve el resultado de las operaciones realizadas
 	 */
 	@Override
