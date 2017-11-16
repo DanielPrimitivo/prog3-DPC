@@ -63,9 +63,11 @@ public class Tablero1D extends Tablero {
 					if (contiene(coord)) {
 						coordenadasVecinas.add(coord);
 					}
+				}
 					
-					x = c.getX() + 1;
-					
+				x = c.getX() + 1;
+				
+				if(x >= 0) {
 					try {
 						coord = new Coordenada1D(x);
 					}
