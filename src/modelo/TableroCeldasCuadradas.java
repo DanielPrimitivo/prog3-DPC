@@ -13,7 +13,7 @@ import modelo.excepciones.*;
  * crear un Tablero y rellenarlo, tiene un getter que devuelve un ArrayList de coordenadas y un método 
  * toString para poder mostrar información, se inicializa a estadocelda muerta. Hereda de Tablero2D
  */
-public class TableroCeldasCuadradas extends Tablero2D {
+public class TableroCeldasCuadradas extends Tablero2D implements Imprimible{
 	
 	/**
 	 * Es un método constructor en el cual te pasan unos parámetros que sirven para llamar al constructor 
@@ -147,5 +147,14 @@ public class TableroCeldasCuadradas extends Tablero2D {
 		cadenaTablero += "+\n";
 		
 		return cadenaTablero;
+	}
+	
+	/**
+	 * Es un método en el cual vamos a guardar en un objeto de tipo String todo lo que debe mostrar posteriormente 
+	 * por pantalla, en caso de que la coordenada este viva entonces ponemos un "*" y en caso de muerta " "
+	 * @return Devuelve la cadena (String) rellenada con toda la estructura que luego se mostrará por pantalla
+	 */
+	public String generaCadena() {
+		return toString();
 	}
 }
