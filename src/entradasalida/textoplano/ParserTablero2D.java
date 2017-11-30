@@ -31,7 +31,9 @@ public class ParserTablero2D implements IParserTablero{
 			
 			String fila = "";
 			
-			cadena += '\n';
+			if (cadena.charAt(cadena.length()-1) != '\n') {
+				cadena += '\n';
+			}
 			
 			for (int i = 0;i < cadena.length();i++) {
 				if (cadena.charAt(i) != '\n') {
@@ -52,7 +54,7 @@ public class ParserTablero2D implements IParserTablero{
 			}
 			
 			try {
-				TableroCeldasCuadradas tablerocc = new TableroCeldasCuadradas(cadena.length(),array.size());
+				TableroCeldasCuadradas tablerocc = new TableroCeldasCuadradas(array.get(0).length(),array.size());
 				
 				for (int i = 0;i < array.size();i++) {
 					for (int j = 0;j < array.get(i).length();j++) {
