@@ -10,15 +10,30 @@ import java.io.PrintWriter;
 
 import entradasalida.IGeneradorFichero;
 import entradasalida.excepciones.ExcepcionGeneracion;
-import modelo.Imprimible;
-import modelo.Juego;
-import modelo.Tablero1D;
-import modelo.TableroCeldasCuadradas;
+import modelo.*;
 import modelo.excepciones.ExcepcionArgumentosIncorrectos;
 
+/**
+ * Esta clase permite crear un objeto GeneradorFicheroPlano el cual tiene implementada la 
+ * interfaz IGeneradorFichero, que obliga a crear el método generaFichero que además puede lanzar 
+ * alguna excepción, también tiene un constructor vacío
+ */
 public class GeneradorFicheroPlano implements IGeneradorFichero{
+	
+	/**
+	 * Es un método constructor el cual está vacío y permite crear el objeto de la clase para 
+	 * posteriormente usar los métodos de este
+	 */
 	public GeneradorFicheroPlano() {}
 	
+	/**
+	 * Es un método que tenemos que crear al haber implementado la interfaz y te pasan por argumentos 
+	 * los objetos necesarios para realizar actualizar el tablero y guardarlo en un fichero
+	 * @param file Es el archivo en el cual luego se deben de guardar los tableros
+	 * @param juego Es el objeto que contiene el tablero el cual debe actualizarse
+	 * @param iteraciones Es la cantidad de actualizaciones del tablero
+	 * @throws ExcepcionGeneracion Puede lanzar la excepcion
+	 */
 	public void generaFichero(File file, Juego juego, int iteraciones) throws ExcepcionGeneracion {
 		if (file != null && juego != null) {
 			if (iteraciones > 0) {

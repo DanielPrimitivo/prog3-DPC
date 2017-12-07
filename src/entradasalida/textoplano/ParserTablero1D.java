@@ -9,9 +9,26 @@ import entradasalida.excepciones.*;
 import modelo.*;
 import modelo.excepciones.*;
 
+/**
+ * Esta clase permite crear un objeto ParserTablero1D el cual tiene implementada la 
+ * interfaz IParserTablero, que obliga a crear el método leeTablero que además puede lanzar 
+ * alguna excepción, también tiene un constructor vacío
+ */
 public class ParserTablero1D implements IParserTablero{
+	
+	/**
+	 * Es un método constructor el cual está vacío y permite crear el objeto de la clase para 
+	 * posteriormente usar los métodos de este
+	 */
 	public ParserTablero1D () {}
 	
+	/**
+	 * Es un método que tenemos que crear al haber implementado la interfaz y te pasan por argumentos 
+	 * los objetos necesarios para crear un tablero con las celdas pasadas
+	 * @param cadena Contiene en un string las celdas del tablero que actualiza
+	 * @return Devuelve un objeto de tipo tablero
+	 * @throws ExcepcionLectura Puede lanzar la excepcion
+	 */
 	public Tablero leeTablero(String cadena) throws ExcepcionLectura {
 		if (cadena != null) {
 			if (cadena.length() == 0) {

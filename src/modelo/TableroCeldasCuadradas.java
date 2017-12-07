@@ -150,8 +150,9 @@ public class TableroCeldasCuadradas extends Tablero2D implements Imprimible{
 	}
 	
 	/**
-	 * Es un método en el cual vamos a guardar en un objeto de tipo String todo lo que debe mostrar posteriormente 
-	 * por pantalla, en caso de que la coordenada este viva entonces ponemos un "*" y en caso de muerta " "
+	 * Es un método en el cual llamamos al toString y va a guardar en un objeto de tipo String todo lo que 
+	 * debe mostrar posteriormente por pantalla, en caso de que la coordenada este viva entonces ponemos un 
+	 * "*" y en caso de muerta " "
 	 * @return Devuelve la cadena (String) rellenada con toda la estructura que luego se mostrará por pantalla
 	 */
 	public String generaCadena() {
