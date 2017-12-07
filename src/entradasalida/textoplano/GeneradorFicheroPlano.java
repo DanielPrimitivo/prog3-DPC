@@ -12,6 +12,8 @@ import entradasalida.IGeneradorFichero;
 import entradasalida.excepciones.ExcepcionGeneracion;
 import modelo.Imprimible;
 import modelo.Juego;
+import modelo.Tablero1D;
+import modelo.TableroCeldasCuadradas;
 import modelo.excepciones.ExcepcionArgumentosIncorrectos;
 
 public class GeneradorFicheroPlano implements IGeneradorFichero{
@@ -24,10 +26,24 @@ public class GeneradorFicheroPlano implements IGeneradorFichero{
 					try {
 						PrintWriter pW = new PrintWriter(file);
 						
-						for (int i = 0;i < iteraciones;i++) {
-							juego.actualiza();
+						if (juego.getTablero() instanceof Tablero1D) {
+							Tablero1D tablero1d = (Tablero1D) juego.getTablero();
 							
-							pW.print(juego.getTablero().generaCadena());
+							for (int i = 0;i < iteraciones;i++) {
+								juego.actualiza();
+								
+								pW.print(tablero1d.generaCadena());
+							}
+						}
+						
+						if (juego.getTablero() instanceof TableroCeldasCuadradas) {
+							TableroCeldasCuadradas tablerocc = (TableroCeldasCuadradas) juego.getTablero();
+							
+							for (int i = 0;i < iteraciones;i++) {
+								juego.actualiza();
+								
+								pW.print(tablerocc.generaCadena());
+							}
 						}
 						
 						pW.close();

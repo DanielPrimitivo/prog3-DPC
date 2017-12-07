@@ -5,6 +5,7 @@
 package entradasalida;
 
 import entradasalida.excepciones.ExcepcionGeneracion;
+import entradasalida.imagen.*;
 import entradasalida.textoplano.GeneradorFicheroPlano;
 import modelo.*;
 import modelo.excepciones.*;
@@ -16,6 +17,17 @@ public class Factory {
 		if (tablero != null && extension != null) {
 			if (extension.equals("txt")) {
 				return new GeneradorFicheroPlano();
+			}
+			else if (extension.equals("gif")) {
+				if (tablero instanceof Tablero1D) {
+					return new GeneradorGIFTablero1D();
+				}
+				else if (tablero instanceof Tablero2D) {
+					return new GeneradorGifAnimadoTablero2D();
+				}
+				else {
+					throw new ExcepcionEjecucion("Tipo tablero incorrecto");
+				}
 			}
 			else {
 				throw new ExcepcionGeneracion("Extension incorrecta");

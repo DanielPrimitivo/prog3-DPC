@@ -12,7 +12,7 @@ import modelo.excepciones.*;
  * unas dimensiones, tiene getters y setters los cuales permiten modificar los estados de las celdas, 
  * obtener coordenas y los estados, además de poder preguntar cierta información y mostrar errores
  */
-public abstract class Tablero implements Imprimible{
+public abstract class Tablero {
 	
 	/**
 	 * Es un atributo el cual es una mapa que contiene una clave que es la coordenada y un valor asociado 
