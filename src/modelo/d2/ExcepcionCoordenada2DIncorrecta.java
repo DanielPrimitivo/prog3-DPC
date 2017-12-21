@@ -2,7 +2,9 @@
  * @author Daniel Primitivo Cano - DNI: 53979721D
  */
 
-package modelo.excepciones;
+package modelo.d2;
+
+import modelo.excepciones.ExcepcionCoordenadaIncorrecta;
 
 /**
  * Es una clase excepción, la cual tiene un método constructor que guarda los parametros, 

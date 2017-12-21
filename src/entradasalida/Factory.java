@@ -5,9 +5,16 @@
 package entradasalida;
 
 import entradasalida.excepciones.ExcepcionGeneracion;
-import entradasalida.imagen.*;
-import entradasalida.textoplano.GeneradorFicheroPlano;
+import entradasalida.gif.*;
+import entradasalida.txt.GeneradorFicheroPlano;
 import modelo.*;
+import modelo.d1.Coordenada1D;
+import modelo.d1.Regla30;
+import modelo.d1.Tablero1D;
+import modelo.d2.Coordenada2D;
+import modelo.d2.ReglaConway;
+import modelo.d2.Tablero2D;
+import modelo.d2.TableroCeldasCuadradas;
 import modelo.excepciones.*;
 
 /**
@@ -33,22 +40,23 @@ public class Factory {
 	 */
 	public static IGeneradorFichero creaGeneradorFichero(Tablero tablero, String extension) throws ExcepcionGeneracion {
 		if (tablero != null && extension != null) {
-			if (extension.equals("txt")) {
-				return new GeneradorFicheroPlano();
+			Class<?> c = null;
+			
+			String cadena = "entradasalida." + extension + ".GeneradorTablero" + tablero.getDimensiones().getClass().getSimpleName();
+			
+			try {
+				c = Class.forName(cadena);
+				IGeneradorFichero fich = (IGeneradorFichero) c.newInstance();
+				return fich;
 			}
-			else if (extension.equals("gif")) {
-				if (tablero instanceof Tablero1D) {
-					return new GeneradorGIFTablero1D();
-				}
-				else if (tablero instanceof Tablero2D) {
-					return new GeneradorGifAnimadoTablero2D();
-				}
-				else {
-					throw new ExcepcionEjecucion("Tipo tablero incorrecto");
-				}
+			catch (ClassNotFoundException e) {
+				throw new ExcepcionGeneracion(cadena);
 			}
-			else {
-				throw new ExcepcionGeneracion("Extension incorrecta");
+			catch (IllegalAccessException e) {
+				throw new ExcepcionGeneracion(e);
+			}
+			catch (InstantiationException e) {
+				throw new ExcepcionGeneracion(e);
 			}
 		}
 		else {

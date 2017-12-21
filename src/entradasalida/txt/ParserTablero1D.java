@@ -2,11 +2,13 @@
  * @author Daniel Primitivo Cano - DNI: 53979721D
  */
 
-package entradasalida.textoplano;
+package entradasalida.txt;
 
 import entradasalida.IParserTablero;
 import entradasalida.excepciones.*;
 import modelo.*;
+import modelo.d1.Coordenada1D;
+import modelo.d1.Tablero1D;
 import modelo.excepciones.*;
 
 /**

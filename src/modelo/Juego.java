@@ -13,22 +13,22 @@ import modelo.excepciones.*;
  * que devuelven el tablero y el ArrayList de patronesUsados y setters para añadir patrones y actualizar 
  * el tablero
  */
-public class Juego {
+public class Juego<TipoCoordenada extends Coordenada> {
 	
 	/**
 	 * Es un atributo que es una lista la cual inicializamos y que contendrá objetos de tipo Patron
 	 */
-	private ArrayList<Patron> patronesUsados = new ArrayList<Patron>();
+	private ArrayList<Patron<TipoCoordenada>> patronesUsados = new ArrayList<Patron<TipoCoordenada>>();
 	
 	/**
 	 * Es un atributo que es un objeto de tipo Tablero en el cual se harán todas las modificaciones
 	 */
-	private Tablero tablero;
+	private Tablero<TipoCoordenada> tablero;
 	
 	/**
 	 * Es un atributo que es un objeto de tipo Regla
 	 */
-	private Regla regla;
+	private Regla<TipoCoordenada> regla;
 	
 	/**
 	 * Es un método constructor en el cual nos pasan un tablero y una regla y tenemos que asignarlos a 
@@ -36,7 +36,7 @@ public class Juego {
 	 * @param tablero Es el tablero el cual vamos a asignar al atributo
 	 * @param regla Es la regla la cual la vamos a asignar al atributo
 	 */
-	public Juego(Tablero tablero, Regla regla) {
+	public Juego(Tablero<TipoCoordenada> tablero, Regla<TipoCoordenada> regla) {
 		if (tablero != null && regla != null) {
 			this.tablero = tablero;
 			this.regla = regla;
@@ -54,7 +54,7 @@ public class Juego {
 	 * @param posicionInicial Es la coordenada superior izquierda del patron
 	 * @throws ExcepcionPosicionFueraTablero Puede lanzar la excepción
 	 */
-	public void cargaPatron(Patron p, Coordenada posicionInicial) throws ExcepcionPosicionFueraTablero {
+	public void cargaPatron(Patron<TipoCoordenada> p, TipoCoordenada posicionInicial) throws ExcepcionPosicionFueraTablero {
 		if(p != null && posicionInicial != null) {
 			tablero.cargaPatron(p, posicionInicial);
 			patronesUsados.add(p);
@@ -70,9 +70,9 @@ public class Juego {
 	 * actualizamos el tablero con los nuevos estados
 	 */
 	public void actualiza() {
-		HashMap<Coordenada,EstadoCelda> celdas = new HashMap<Coordenada,EstadoCelda>();
+		HashMap<TipoCoordenada,EstadoCelda> celdas = new HashMap<TipoCoordenada,EstadoCelda>();
 		
-		for (Coordenada coord : tablero.getPosiciones()) {
+		for (TipoCoordenada coord : tablero.getPosiciones()) {
 			try {
 				celdas.put(coord, regla.calculaSiguienteEstadoCelda(tablero,coord));
 			}
@@ -81,7 +81,7 @@ public class Juego {
 			}
 		}
 		
-		for (Coordenada coord : celdas.keySet()) {
+		for (TipoCoordenada coord : celdas.keySet()) {
 			try {
 				tablero.setCelda(coord, celdas.get(coord));
 			}
@@ -95,7 +95,7 @@ public class Juego {
 	 * Es un método getter el cual devuelve el atributo tablero
 	 * @return Devuelve un objeto de tipo Tablero que es el atributo tablero
 	 */
-	public Tablero getTablero() {
+	public Tablero<TipoCoordenada> getTablero() {
 		return tablero;
 	}
 	
@@ -103,7 +103,7 @@ public class Juego {
 	 * Es un método getter el cual devolvemos la lista (ArrayList) que tiene los patrones que se han usado
 	 * @return Devuelve un objeto de tipo ArrayList que contiene objetos de tipo patron
 	 */
-	public ArrayList<Patron> getPatrones() {
+	public ArrayList<Patron<TipoCoordenada>> getPatrones() {
 		return patronesUsados;
 	}
 	

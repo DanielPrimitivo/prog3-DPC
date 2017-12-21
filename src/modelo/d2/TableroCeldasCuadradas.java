@@ -2,10 +2,12 @@
  * @author Daniel Primitivo Cano - DNI: 53979721D
  */
 
-package modelo;
+package modelo.d2;
 
 import java.util.*;
 
+import modelo.EstadoCelda;
+import modelo.Imprimible;
 import modelo.excepciones.*;
 
 /**
@@ -33,11 +35,11 @@ public class TableroCeldasCuadradas extends Tablero2D implements Imprimible{
 	 * @return devuelve un ArrayList de coordenadas
 	 * @throws ExcepcionPosicionFueraTablero Puede lanzar la excepción
 	 */
-	public ArrayList<Coordenada> getPosicionesVecinasCCW(Coordenada posicion) throws ExcepcionPosicionFueraTablero {
+	public ArrayList<Coordenada2D> getPosicionesVecinasCCW(Coordenada2D posicion) throws ExcepcionPosicionFueraTablero {
 		if (posicion != null) {
 			Coordenada2D c = (Coordenada2D) posicion;
 			if (contiene(new Coordenada2D(c))) {
-				ArrayList<Coordenada> coordenadasVecinas = new ArrayList<Coordenada>();
+				ArrayList<Coordenada2D> coordenadasVecinas = new ArrayList<Coordenada2D>();
 				Coordenada2D coord;
 				
 				int x = c.getX() - 1;

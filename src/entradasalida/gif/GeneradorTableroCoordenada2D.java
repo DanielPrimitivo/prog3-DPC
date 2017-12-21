@@ -2,7 +2,7 @@
  * @author Daniel Primitivo Cano - DNI: 53979721D
  */
 
-package entradasalida.imagen;
+package entradasalida.gif;
 
 import java.io.File;
 
@@ -10,6 +10,8 @@ import entradasalida.IGeneradorFichero;
 import entradasalida.excepciones.ExcepcionGeneracion;
 import gifs.*;
 import modelo.*;
+import modelo.d2.Coordenada2D;
+import modelo.d2.TableroCeldasCuadradas;
 import modelo.excepciones.*;
 
 /**
@@ -17,13 +19,13 @@ import modelo.excepciones.*;
  * interfaz IGeneradorFichero, que obliga a crear el método generaFichero que además puede lanzar 
  * alguna excepción, también tiene un constructor vacío
  */
-public class GeneradorGifAnimadoTablero2D implements IGeneradorFichero{
+public class GeneradorTableroCoordenada2D implements IGeneradorFichero{
 	
 	/**
 	 * Es un método constructor el cual está vacío y permite crear el objeto de la clase para 
 	 * posteriormente usar los métodos de este
 	 */
-	public GeneradorGifAnimadoTablero2D() {}
+	public GeneradorTableroCoordenada2D() {}
 	
 	/**
 	 * Es un método que tenemos que crear al haber implementado la interfaz y te pasan por argumentos 

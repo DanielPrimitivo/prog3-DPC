@@ -5,7 +5,7 @@
 package entradasalida;
 
 import entradasalida.excepciones.ExcepcionLectura;
-import entradasalida.textoplano.*;
+import entradasalida.txt.*;
 import modelo.Tablero;
 import modelo.excepciones.*;
 

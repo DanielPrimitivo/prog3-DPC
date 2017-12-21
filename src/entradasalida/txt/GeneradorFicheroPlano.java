@@ -2,7 +2,7 @@
  * @author Daniel Primitivo Cano - DNI: 53979721D
  */
 
-package entradasalida.textoplano;
+package entradasalida.txt;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -11,6 +11,8 @@ import java.io.PrintWriter;
 import entradasalida.IGeneradorFichero;
 import entradasalida.excepciones.ExcepcionGeneracion;
 import modelo.*;
+import modelo.d1.Tablero1D;
+import modelo.d2.TableroCeldasCuadradas;
 import modelo.excepciones.ExcepcionArgumentosIncorrectos;
 
 /**

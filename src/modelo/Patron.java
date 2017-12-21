@@ -12,12 +12,12 @@ import modelo.excepciones.*;
  * y tiene métodos getters los cuales devuelven el atributo nombre, el estado de alguna coordenada del 
  * tablero de patron, las posiciones (coordenadas) de este y la estructura con el toString
  */
-public class Patron {
+public class Patron<TipoCoordenada extends Coordenada> {
 	
 	/**
 	 * Es un atributo el cual es un objeto de tipo Tablero que contendrá las coordenadas y los EstadoCelda
 	 */
-	private Tablero tablero;
+	private Tablero<TipoCoordenada> tablero;
 	
 	/**
 	 * Es un atributo de tipo String el cual es el nombre del patron
@@ -29,7 +29,7 @@ public class Patron {
 	 * @param nombre Es el nombre del patron que vamos a guardar
 	 * @param tablero Es el tablero el cual tiene las coordenadas y los EstadoCelda que vamos a guardar
 	 */
-	public Patron(String nombre, Tablero tablero) {
+	public Patron(String nombre, Tablero<TipoCoordenada> tablero) {
 		if (nombre != null && tablero != null) {
 			this.nombre = nombre;
 			this.tablero = tablero;
@@ -54,7 +54,7 @@ public class Patron {
 	 * @return Devuelve el EstadoCelda asociado a la posicion
 	 * @throws ExcepcionPosicionFueraTablero Puede lanzar la excepción
 	 */
-	public EstadoCelda getCelda(Coordenada posicion) throws ExcepcionPosicionFueraTablero {
+	public EstadoCelda getCelda(TipoCoordenada posicion) throws ExcepcionPosicionFueraTablero {
 		if (posicion != null) {
 			return tablero.getCelda(posicion);
 		}
@@ -68,7 +68,7 @@ public class Patron {
 	 * coordenadas del tablero de nuestro patron
 	 * @return Devuelve un collection el cual contiene todas las posiciones del tablero de patron
 	 */
-	public Collection<Coordenada> getPosiciones() {
+	public Collection<TipoCoordenada> getPosiciones() {
 		return tablero.getPosiciones();
 	}
 	

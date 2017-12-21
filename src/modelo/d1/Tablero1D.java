@@ -2,10 +2,13 @@
  * @author Daniel Primitivo Cano - DNI: 53979721D
  */
 
-package modelo;
+package modelo.d1;
 
 import java.util.ArrayList;
 
+import modelo.EstadoCelda;
+import modelo.Imprimible;
+import modelo.Tablero;
 import modelo.excepciones.*;
 
 /**
@@ -13,7 +16,7 @@ import modelo.excepciones.*;
  * un Tablero y rellenarlo, tiene un getter que devuelve un ArrayList de coordenadas y un método 
  * toString para poder mostrar información, se inicializa a estadocelda muerta. Hereda de Tablero
  */
-public class Tablero1D extends Tablero implements Imprimible{
+public class Tablero1D extends Tablero<Coordenada1D> implements Imprimible{
 	
 	/**
 	 * Es un método constructor en el cual te pasan uno parámetro que sirve para llamar al constructor 
@@ -42,11 +45,11 @@ public class Tablero1D extends Tablero implements Imprimible{
 	 * @return devuelve un ArrayList de coordenadas
 	 * @throws ExcepcionPosicionFueraTablero Puede lanzar la excepción
 	 */
-	public ArrayList<Coordenada> getPosicionesVecinasCCW(Coordenada posicion) throws ExcepcionPosicionFueraTablero {
+	public ArrayList<Coordenada1D> getPosicionesVecinasCCW(Coordenada1D posicion) throws ExcepcionPosicionFueraTablero {
 		if (posicion != null) {
 			Coordenada1D c = (Coordenada1D) posicion;
 			if (contiene(new Coordenada1D(c))) {
-				ArrayList<Coordenada> coordenadasVecinas = new ArrayList<Coordenada>();
+				ArrayList<Coordenada1D> coordenadasVecinas = new ArrayList<Coordenada1D>();
 				
 				Coordenada1D coord;
 				

@@ -2,13 +2,15 @@
  * @author Daniel Primitivo Cano - DNI: 53979721D
  */
 
-package entradasalida.textoplano;
+package entradasalida.txt;
 
 import java.util.ArrayList;
 
 import entradasalida.IParserTablero;
 import entradasalida.excepciones.ExcepcionLectura;
 import modelo.*;
+import modelo.d2.Coordenada2D;
+import modelo.d2.TableroCeldasCuadradas;
 import modelo.excepciones.*;
 
 /**

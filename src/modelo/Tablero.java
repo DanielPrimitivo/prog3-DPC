@@ -12,27 +12,27 @@ import modelo.excepciones.*;
  * unas dimensiones, tiene getters y setters los cuales permiten modificar los estados de las celdas, 
  * obtener coordenas y los estados, además de poder preguntar cierta información y mostrar errores
  */
-public abstract class Tablero {
+public abstract class Tablero<TipoCoordenada extends Coordenada> {
 	
 	/**
 	 * Es un atributo el cual es una mapa que contiene una clave que es la coordenada y un valor asociado 
 	 * a la clave que es el estado en el que se encuentra esa coordenada
 	 */
-	protected HashMap<Coordenada,EstadoCelda> celdas;
+	protected HashMap<TipoCoordenada,EstadoCelda> celdas;
 	
 	/**
 	 * Es un atributo el cual es de tipo coordenada y contiene el tamaño del tablero
 	 */
-	protected Coordenada dimensiones;
+	protected TipoCoordenada dimensiones;
 	
 	/**
 	 * Es el método constructor en el cual recibes por parametro las dimensiones que lo guardamos en el 
 	 * atributo
 	 * @param dimensiones Es el tamaño del tablero
 	 */
-	protected Tablero(Coordenada dimensiones) {
+	protected Tablero(TipoCoordenada dimensiones) {
 		if (dimensiones != null) {
-			celdas = new HashMap<Coordenada,EstadoCelda>();
+			celdas = new HashMap<TipoCoordenada,EstadoCelda>();
 			this.dimensiones = dimensiones;
 		}
 		else {
@@ -44,7 +44,7 @@ public abstract class Tablero {
 	 * Es un método getter que devuelve las dimensiones del tablero que es de tipo coordenada
 	 * @return devuelve una copia del campo dimensiones
 	 */
-	public Coordenada getDimensiones() {
+	public TipoCoordenada getDimensiones() {
 		return dimensiones;
 	}
 	
@@ -53,8 +53,8 @@ public abstract class Tablero {
 	 * clase HashMap con el cual obtenemos todas las coordenadas que contiene
 	 * @return devuelve un collection que contiene todas las coordenadas del tablero
 	 */
-	public Collection<Coordenada> getPosiciones() {
-		Collection<Coordenada> coordenadas = celdas.keySet();
+	public Collection<TipoCoordenada> getPosiciones() {
+		Collection<TipoCoordenada> coordenadas = celdas.keySet();
 		
 		return coordenadas;
 	}
@@ -67,7 +67,7 @@ public abstract class Tablero {
 	 * @return Devuelve un objeto de tipo EstadoCelda o en caso de no existir entonces devuelve null
 	 * @throws ExcepcionPosicionFueraTablero Puede lanzar la excepción
 	 */
-	public EstadoCelda getCelda(Coordenada posicion) throws ExcepcionPosicionFueraTablero {
+	public EstadoCelda getCelda(TipoCoordenada posicion) throws ExcepcionPosicionFueraTablero {
 		if (posicion != null) {
 			if (contiene(posicion)) {
 				EstadoCelda valorEstado = celdas.get(posicion);
@@ -90,7 +90,7 @@ public abstract class Tablero {
 	 * @param e Es el estado que queremos poner a la coordenada indicada
 	 * @throws ExcepcionPosicionFueraTablero Puede lanzar la excepción
 	 */
-	public void setCelda(Coordenada posicion, EstadoCelda e) throws ExcepcionPosicionFueraTablero {
+	public void setCelda(TipoCoordenada posicion, EstadoCelda e) throws ExcepcionPosicionFueraTablero {
 		if(posicion != null && e != null) {
 			if (contiene(posicion)) {
 				celdas.put(posicion, e);
@@ -111,7 +111,7 @@ public abstract class Tablero {
 	 * @return No devuelve nada ya que es un método abstracto
 	 * @throws ExcepcionPosicionFueraTablero Puede lanzar la excepción
 	 */
-	public abstract ArrayList <Coordenada> getPosicionesVecinasCCW(Coordenada posicion) throws ExcepcionPosicionFueraTablero;
+	public abstract ArrayList <TipoCoordenada> getPosicionesVecinasCCW(TipoCoordenada posicion) throws ExcepcionPosicionFueraTablero;
 		
 	
 	/**
@@ -122,12 +122,12 @@ public abstract class Tablero {
 	 * @param coordenadaInicial Es un objeto de tipo coordenada que pasa la coordenada superior izquierda de patron
 	 * @throws ExcepcionPosicionFueraTablero Puede lanzar la excepción
 	 */
-	public void cargaPatron(Patron patron, Coordenada coordenadaInicial) throws ExcepcionPosicionFueraTablero {
+	public void cargaPatron(Patron<TipoCoordenada> patron, TipoCoordenada coordenadaInicial) throws ExcepcionPosicionFueraTablero {
 		if (patron != null && coordenadaInicial != null) {
 			
-			for (Coordenada coord : patron.getPosiciones()) {
+			for (TipoCoordenada coord : patron.getPosiciones()) {
 				try {
-					Coordenada coordenada = coord.suma(coordenadaInicial);
+					TipoCoordenada coordenada = (TipoCoordenada) coord.suma(coordenadaInicial);
 					
 					if (!contiene(coordenada)) {
 						throw new ExcepcionPosicionFueraTablero(dimensiones, coordenada);
@@ -139,9 +139,9 @@ public abstract class Tablero {
 				
 			}
 			
-			for (Coordenada coord : patron.getPosiciones()) {
+			for (TipoCoordenada coord : patron.getPosiciones()) {
 				try {
-					Coordenada coordenada = coord.suma(coordenadaInicial);
+					TipoCoordenada coordenada = (TipoCoordenada) coord.suma(coordenadaInicial);
 					setCelda(coordenada, patron.getCelda(coord));
 				}
 				catch (ExcepcionCoordenadaIncorrecta e) {
@@ -160,7 +160,7 @@ public abstract class Tablero {
 	 * @param posicion Es la coordenada la cual queremos saber si existe en el tablero
 	 * @return Devuelve un valor de tipo booleano de si la contiene o no
 	 */
-	public boolean contiene(Coordenada posicion) {
+	public boolean contiene(TipoCoordenada posicion) {
 		if (posicion != null) {
 			if (celdas.containsKey(posicion)) {
 				return true;

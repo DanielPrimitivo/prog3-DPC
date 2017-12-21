@@ -10,7 +10,7 @@ import modelo.excepciones.*;
  * Esta clase permite crear un objeto Regla el cual tiene un constructor vacío y un getter que es 
  * un método abstracto
  */
-public abstract class Regla {
+public abstract class Regla<TipoCoordenada extends Coordenada> {
 	
 	/**
 	 * Es un método constructor que en este caso está vacío
@@ -25,5 +25,5 @@ public abstract class Regla {
 	 * @return No devuelve nada ya que es un método abstracto
 	 * @throws ExcepcionPosicionFueraTablero Puede lanzar la excepción
 	 */
-	public abstract EstadoCelda calculaSiguienteEstadoCelda(Tablero tablero, Coordenada posicion) throws ExcepcionPosicionFueraTablero;
+	public abstract EstadoCelda calculaSiguienteEstadoCelda(Tablero<TipoCoordenada> tablero, TipoCoordenada posicion) throws ExcepcionPosicionFueraTablero;
 }

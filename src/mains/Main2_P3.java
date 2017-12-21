@@ -6,8 +6,8 @@ import modelo.Coordenada;
 import modelo.EstadoCelda;
 import modelo.Juego;
 import modelo.Patron;
-import modelo.ReglaConway;
 import modelo.Tablero;
+import modelo.d2.ReglaConway;
 import modelo.excepciones.ExcepcionCoordenadaIncorrecta;
 import modelo.excepciones.ExcepcionPosicionFueraTablero;
 

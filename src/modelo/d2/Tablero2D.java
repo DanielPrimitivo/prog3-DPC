@@ -2,15 +2,17 @@
  * @author Daniel Primitivo Cano - DNI: 53979721D
  */
 
-package modelo;
+package modelo.d2;
 
+import modelo.EstadoCelda;
+import modelo.Tablero;
 import modelo.excepciones.*;
 
 /**
  * Esta clase es abstracta y permite crear un objeto de tipo Tablero2D el cual tiene un constructor para crear 
  * un Tablero y rellenarlo, se inicializa a estadocelda muerta. Hereda de Tablero
  */
-public abstract class Tablero2D extends Tablero{
+public abstract class Tablero2D extends Tablero<Coordenada2D>{
 	
 	/**
 	 * Es el método constructor el cual te pasan por parámetro el ancho y alto para crear el 
