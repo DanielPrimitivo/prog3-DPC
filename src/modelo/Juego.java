@@ -12,6 +12,7 @@ import modelo.excepciones.*;
  * al juego, un tablero y una regla, además tiene un constructor que inicializa tablero y regla, getter 
  * que devuelven el tablero y el ArrayList de patronesUsados y setters para añadir patrones y actualizar 
  * el tablero
+ * @param <TipoCoordenada> Es el tipo de la coordenada
  */
 public class Juego<TipoCoordenada extends Coordenada> {
 	

@@ -9,6 +9,7 @@ import modelo.excepciones.*;
 /**
  * Esta clase permite crear un objeto Regla el cual tiene un constructor vacío y un getter que es 
  * un método abstracto
+ * @param <TipoCoordenada> Es el tipo de la coordenada
  */
 public abstract class Regla<TipoCoordenada extends Coordenada> {
 	

@@ -11,6 +11,7 @@ import modelo.excepciones.*;
  * Esta clase permite crear un patron en el cual sus atributos son un objeto tablero y un nombre (String), 
  * y tiene métodos getters los cuales devuelven el atributo nombre, el estado de alguna coordenada del 
  * tablero de patron, las posiciones (coordenadas) de este y la estructura con el toString
+ * @param <TipoCoordenada> Es el tipo de la coordenada
  */
 public class Patron<TipoCoordenada extends Coordenada> {
 	

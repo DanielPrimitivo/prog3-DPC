@@ -11,6 +11,7 @@ import modelo.excepciones.*;
  * Esta clase permite crear un HashMap (que es una matriz de celdas) en la cual se inicializa rellena con 
  * unas dimensiones, tiene getters y setters los cuales permiten modificar los estados de las celdas, 
  * obtener coordenas y los estados, además de poder preguntar cierta información y mostrar errores
+ * @param <TipoCoordenada> Es el tipo de la coordenada
  */
 public abstract class Tablero<TipoCoordenada extends Coordenada> {
 	
